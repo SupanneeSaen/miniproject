@@ -1,0 +1,113 @@
+<?xml version = "1.0"?>
+<!-- your name robot -->
+<robot name = "robotArm">
+
+<!-- name of link -->
+<link name = "base_link"> /
+
+    <visual>
+    <!-- The shape of the robot in rviz -->
+        <geometry>
+            <!-- import file stl and Adjust the size in meters x y z -->
+            <mesh filename="package://robot_urdf/f_stl/link0.STL" scale = "0.001 0.001 0.001 "/>
+        </geometry>
+        <origin xyz = "-0.1 0.1 0 " rpy = "1.56 0 0" />
+    </visual>
+
+    <collision>
+    <!-- Bumper part of the robot body in rviz -->
+        <geometry>
+            <!-- import file stl and Adjust the size in meters x y z -->
+            <mesh filename ="package://robot_urdf/f_stl/link0.STL" scale = "0.001 0.001 0.001"/>
+        </geometry>
+        <origin xyz = "-0.1 0.1 0" rpy = "1.56 0 0" />
+    </collision>
+
+     <inertial>
+     <!-- inertial of robot -->
+        <origin xyz = "-0.1 0.1 0" rpy = "1.56 0 0" />
+        <mass value = "0.1598"/>
+        <!-- mass = kg innertia = Nm^3 -->
+        <inertia ixx = "0.001" ixy = "0" ixz = "0" iyy = "0.001" iyz = "0" izz = "0.001"/>
+    </inertial>
+</link>
+
+<link name = "link1">
+    <visual>
+    <!-- The shape of the robot in rviz -->
+        <geometry>
+            <!-- import file stl and Adjust the size in meters x y z -->
+            <mesh filename="package://robot_urdf/f_stl/joint1R.STL" scale = "0.001 0.001 0.001" />
+        </geometry>
+        <origin xyz = "-0.0698 0.043 0.043" rpy = "1.56 0 0" />
+    </visual>
+
+    <collision>
+    <!-- Bumper part of the robot body in rviz -->
+        <geometry>
+            <!-- import file stl and Adjust the size in meters x y z -->
+            <mesh filename ="package://robot_urdf/f_stl/joint1R.STL" scale = "0.001 0.001 0.001"/>
+        </geometry>
+        <origin xyz = "-0.0698 0.43 0.043" rpy = "1.56 0 0" />
+    </collision>
+
+     <inertial>
+     <!-- inertial of robot -->
+        <origin xyz = "-0.0698 0.43 0.043" rpy = "1.56 0 0" />
+        <mass value = "0.104"/>
+        <!-- mass = kg innertia = Nm^3 -->
+        <inertia ixx = "0.001" ixy = "0" ixz = "0" iyy = "0.001" iyz = "0" izz = "0.001"/>
+    </inertial>
+</link>
+
+<!-- ////////////    joint1    /////////// -->
+<joint name = "joint1" type = "revolute">
+<!-- name your joint and type of robot -->
+
+    <parent link = "base_link"/>        
+    <!-- Things attached to a joint-->
+    <child link = "link1"/>     
+    <!-- link attached to the top of the joint  -->
+    <origin xyz = "0 0 0" rpy = "0 0 0"/>      
+    <!-- origin of joint -->
+    <axis xyz = "0 0 1"/>       
+    <!-- In which axis to move? -->
+
+    <limit lower = "-3.1416" upper = "3.1416" effort = "100" velocity = "1"/>
+    <!-- lower of robot ,upper of robot, effort and velocity of robot -->
+</joint>
+
+<link name = "link2">
+    <visual>
+        <geometry>
+            <mesh filename="package://robot_urdf/f_stl/joint2_p.STL" scale = "0.001 0.001 0.001" />
+        </geometry>
+        <origin xyz = "0.0805 -0.013 0.0155" rpy = "0 3.12 0" />
+    </visual>
+
+    <collision>
+        <geometry>
+            <mesh filename ="package://robot_urdf/f_stl/joint2_p.STL" scale = "0.001 0.001 0.001"/>
+        </geometry>
+        <origin xyz = "0.0805 -0.013 0.0155" rpy = "0 3.12 0" />
+    </collision>
+
+     <inertial>
+        <origin xyz = "0.0805 -0.013 0.0155" rpy = "0 3.12 0" />
+        <mass value = "0.01883"/>
+        <inertia ixx = "0.001" ixy = "0" ixz = "0" iyy = "0.001" iyz = "0" izz = "0.001"/>
+    </inertial>
+</link>
+
+<!-- ////////////    joint2    /////////// -->
+<joint name = "joint2" type = "prismatic">
+
+    <parent link = "link1"/>
+    <child link = "link2"/>
+    <origin xyz = "0 0 0.155 " rpy = "0 0 0"/>
+    <axis xyz = "1 0 0"/>
+    <limit lower = "-0.049" upper = "0.049" effort = "100" velocity = "1"/>
+
+</joint>
+
+</robot>
